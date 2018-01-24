@@ -1,4 +1,4 @@
-FROM amazonlinux:2017.09
+FROM amazonlinux:2017.12
 
 ENV PYTHON_VERSION 3.6.1
 
