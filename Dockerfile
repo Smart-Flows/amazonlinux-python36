@@ -6,7 +6,9 @@ RUN yum update -y && \
 
 # Install python3.6.2, using the method described in amazonlinux image documentation's
 # "How do I install a software package from Extras repository in Amazon Linux 2 LTS Candidate?"
-RUN amazon-linux-extras install python3
+RUN amazon-linux-extras install python3 && \
+    yum install -y python3-devel && \
+    yum clean all
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
