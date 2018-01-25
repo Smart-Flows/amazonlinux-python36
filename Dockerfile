@@ -1,24 +1,12 @@
-FROM amazonlinux:2017.09
-
-ENV PYTHON_VERSION 3.6.1
+FROM amazonlinux:2017.12
 
 RUN yum update -y && \
     yum install gcc zlib zlib-devel openssl openssl-devel libffi libffi-devel wget zip -y && \
     yum clean all
 
-RUN wget https://www.python.org/static/files/pubkeys.txt && \
-    gpg --import pubkeys.txt; exit 0
-
-RUN wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz && \
-    wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz.asc && \
-    gpg --verify Python-${PYTHON_VERSION}.tgz.asc && \
-    tar -xvzf Python-${PYTHON_VERSION}.tgz && \
-    cd Python-${PYTHON_VERSION} && \
-    ./configure && \
-    make && \
-    make install && \
-    cd .. && \
-    rm -fr Python-${PYTHON_VERSION}
+# Install python3.6.2, using the method described in amazonlinux image documentation's
+# "How do I install a software package from Extras repository in Amazon Linux 2 LTS Candidate?"
+RUN amazon-linux-extras install python3
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
