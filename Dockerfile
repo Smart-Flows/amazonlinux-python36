@@ -1,4 +1,4 @@
-FROM amazonlinux:2017.12
+FROM amazonlinux:2018.03
 
 RUN yum update -y && \
     yum install gcc zlib zlib-devel openssl openssl-devel libffi libffi-devel wget zip -y && \
